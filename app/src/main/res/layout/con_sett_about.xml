@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:onClick="none"
+    android:background="@color/colorBlack50">
+
+    <RelativeLayout
+        android:id="@+id/con_about_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_dialog">
+
+    <LinearLayout
+        android:id="@+id/con_about_div"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_screen"
+        android:background="@drawable/bg_dialog">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:paddingBottom="15dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/fontsize_titlepage"
+                    android:text="Information"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="todo"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_container"
+                    android:textSize="@dimen/fontsize_titlepage"
+                    android:text="Credits"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Developer Team"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Riza Lyn R. Opiniano\nJohn Angelo A. Rivero\nRozelle Ramos\nShy Vegiga"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Developent App and Tools"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Android Studio\nPhotoshop\nFirebase\nSQLite\nIcons8"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Application Program Interface"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="@dimen/fontsize_default"
+                    android:text="Google Mobile Vision\nJava Mail\nAndroid Image Cropper"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnCloseAbout"
+        android:onClick="OnCLick_Close"
+        android:layout_width="@dimen/size_button_xsmall"
+        android:layout_height="@dimen/size_button_xsmall"
+        android:layout_alignTop="@id/con_about_div"
+        android:layout_alignEnd="@id/con_about_div"
+        android:src="@mipmap/icon_cancel"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:onClick="none"
+    android:background="@color/colorBlack50">
+
+    <RelativeLayout
+        android:id="@+id/con_help_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_dialog">
+
+    <LinearLayout
+        android:id="@+id/con_help_div"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/padding_screen"
+        android:background="@drawable/bg_dialog">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/help"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:paddingBottom="15dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+<!--                TODO-->
+
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnCloseHelp"
+        android:onClick="OnCLick_Close"
+        android:layout_width="@dimen/size_button_xsmall"
+        android:layout_height="@dimen/size_button_xsmall"
+        android:layout_alignTop="@id/con_help_div"
+        android:layout_alignEnd="@id/con_help_div"
+        android:src="@mipmap/icon_cancel"/>
+    </RelativeLayout>
+</RelativeLayout>

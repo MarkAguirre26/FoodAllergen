@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_item_contact"
+    android:layout_margin="3dp"
+    card_view:cardBackgroundColor="@color/colorDirtyWhite"
+    card_view:cardCornerRadius="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_screen"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/tvContactRelation"
+            android:text="@string/contact_name"
+            android:singleLine="true"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:textColor="@color/colorPrimaryDark"/>
+
+
+        <TextView
+            android:id="@+id/tvContactRelation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="3dp"
+            android:text="@string/relation"
+            android:textSize="@dimen/fontsize_default"/>
+
+        <TextView
+            android:id="@+id/tvContactNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvContactName"
+            android:text="@string/contact_number"
+            android:textSize="@dimen/fontsize_default"/>
+
+        <Switch
+            android:id="@+id/switchSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:checked="true"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

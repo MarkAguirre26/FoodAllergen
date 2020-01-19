@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".RegistrationSuccessActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/success" />
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registered"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack50"
+            android:textSize="25sp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="469dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/successfully"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlue"
+            android:textSize="35sp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="501dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_accent"
+        android:onClick="done_Clicked"
+        android:text="@string/done"
+        android:textColor="@color/colorWhite"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="679dp" />
+
+</RelativeLayout>

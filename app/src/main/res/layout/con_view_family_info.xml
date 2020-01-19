@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:onClick="none"
+    android:background="@color/colorBlack50">
+
+    <LinearLayout
+        android:id="@+id/con_view_family_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:padding="@dimen/padding_screen"
+        android:background="@drawable/bg_dialog">
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="@string/name"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:textColor="@color/colorPrimaryDark"
+            android:singleLine="true" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/members_informtion"
+                    android:textSize="@dimen/fontsize_small"
+                    android:textColor="@color/colorGreenDark"/>
+
+                <TextView
+                    android:id="@+id/tvRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_relation"
+                    android:drawablePadding="5dp"
+                    android:text="@string/relation" />
+
+                <TextView
+                    android:id="@+id/tvBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_date"
+                    android:drawablePadding="5dp"
+                    android:text="@string/birthday" />
+
+                <TextView
+                    android:id="@+id/tvHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_swap_vert"
+                    android:drawablePadding="5dp"
+                    android:text="@string/height"/>
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_swap_hori"
+                    android:drawablePadding="5dp"
+                    android:text="@string/weight"/>
+
+                <TextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_swap_hori"
+                    android:drawablePadding="5dp"
+                    android:text="@string/gender" />
+
+                <TextView
+                    android:id="@+id/tvPregnant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icon_pregnant"
+                    android:drawablePadding="5dp"
+                    android:text="@string/pregnant" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/list_of_allergy"
+                    android:textSize="@dimen/fontsize_small"
+                    android:textColor="@color/colorGreenDark"/>
+
+                <TextView
+                    android:id="@+id/tvListOfAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list_of_allergy" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/recommended_intake"
+                    android:textSize="@dimen/fontsize_small"
+                    android:textColor="@color/colorGreenDark"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ImageView
+        android:onClick="OnCLick_HideViewFamInfo"
+        android:layout_width="@dimen/size_button_xsmall"
+        android:layout_height="@dimen/size_button_xsmall"
+        android:layout_alignTop="@id/con_view_family_dialog"
+        android:layout_alignEnd="@id/con_view_family_dialog"
+        android:src="@mipmap/icon_cancel"/>
+</RelativeLayout>

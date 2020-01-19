@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/bg_white">
+
+    <CheckBox
+        android:onClick="OnClick_KeepSignIn"
+        android:id="@+id/cbKeepLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="@dimen/fontsize_default"
+        android:buttonTint="@color/colorAccent"
+        android:text="@string/keeplogin" />
+
+    <CheckBox
+        android:onClick="OnClick_Notification"
+        android:id="@+id/cbNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_container"
+        android:padding="5dp"
+        android:textSize="@dimen/fontsize_default"
+        android:buttonTint="@color/colorAccent"
+        android:text="@string/notification" />
+
+    <Button
+        android:onClick="OnClick_UploadData"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_button_small"
+        android:layout_marginTop="@dimen/margin_container"
+        android:textSize="@dimen/fontsize_default"
+        android:textAllCaps="false"
+        android:text="@string/upload_data" />
+
+    <Button
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_button_small"
+        android:layout_marginTop="@dimen/margin_container"
+        android:onClick="OnClick_About"
+        android:text="@string/about_us"
+        android:textAllCaps="false"
+        android:textSize="@dimen/fontsize_default" />
+
+    <Button
+        android:onClick="OnClick_Help"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_button_small"
+        android:layout_marginTop="@dimen/margin_container"
+        android:textSize="@dimen/fontsize_default"
+        android:textAllCaps="false"
+        android:text="@string/help" />
+
+    <Button
+        android:onClick="OnClick_Logout"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_button_small"
+        android:layout_marginTop="@dimen/margin_container"
+        android:textSize="@dimen/fontsize_default"
+        android:textAllCaps="false"
+        android:textColor="@color/colorRed"
+        android:text="@string/logout" />
+
+</LinearLayout>

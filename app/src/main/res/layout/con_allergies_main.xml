@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="none"
+    android:background="@color/colorDirtyWhite">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_screen"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="@dimen/fontsize_titlepage"
+        android:text="@string/select_allergies"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_above="@id/btnDoneCheckAllergies">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                layout="@layout/con_allergies_cowsmilk"/>
+            <include
+                layout="@layout/con_allergies_eggs"/>
+            <include
+                layout="@layout/con_allergies_treenuts"/>
+            <include
+                layout="@layout/con_allergies_peanuts"/>
+            <include
+                layout="@layout/con_allergies_shellfish"/>
+            <include
+                layout="@layout/con_allergies_wheat"/>
+            <include
+                layout="@layout/con_allergies_soy"/>
+            <include
+                layout="@layout/con_allergies_fish"/>
+<!--            <include-->
+<!--                layout="@layout/con_allergies_other"/>-->
+
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:id="@+id/btnDoneCheckAllergies"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="OnClick_DoneCheckAllergies"
+        android:background="@color/colorAccent"
+        android:text="@string/done"
+        android:textColor="@color/colorWhite"/>
+
+</RelativeLayout>

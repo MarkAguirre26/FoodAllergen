@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_container"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_screen"
+    android:background="@color/colorWhite">
+
+    <CheckBox
+        android:id="@+id/cbAllergy_Eggs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/egg_allergy"
+        android:textSize="@dimen/fontsize_default"
+        android:textColor="@color/colorGreenDark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_screen">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/egginfo"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Eggs_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Egg Whites"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Eggs_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Egg Yolks"
+            android:textSize="@dimen/fontsize_small"/>
+    </LinearLayout>
+</LinearLayout>

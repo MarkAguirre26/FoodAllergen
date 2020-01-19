@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_container"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_screen"
+    android:background="@color/colorWhite">
+
+    <CheckBox
+        android:id="@+id/cbAllergy_Peanuts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/peanut_allergy"
+        android:textSize="@dimen/fontsize_default"
+        android:textColor="@color/colorGreenDark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_screen">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/peanutinfo"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Peanuts_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peanut Butter"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Peanuts_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Virginia peanuts"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Peanuts_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spanish peanuts"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Peanuts_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valencia peanuts"
+            android:textSize="@dimen/fontsize_small"/>
+    </LinearLayout>
+</LinearLayout>

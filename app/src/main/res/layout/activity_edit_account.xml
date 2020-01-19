@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorGrayLight"
+    tools:context=".EditAccountActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/con_toolbar" />
+
+    <include
+        layout="@layout/con_edit_ser_form"
+        android:layout_width="match_parent"
+        android:layout_height="921dp"
+        android:layout_above="@id/btnSubmit"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="-10dp" />
+
+    <Button
+        android:id="@+id/btnUpdateAccount"
+        android:onClick="OnClick_SubmitAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_accent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit"
+        android:textColor="@color/colorWhite"/>
+
+</RelativeLayout>

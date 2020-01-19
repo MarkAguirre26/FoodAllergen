@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:clickable="false"
+    android:background="@color/colorBlack50">
+
+    <LinearLayout
+        android:id="@+id/con_contact_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:padding="@dimen/padding_screen"
+        android:background="@drawable/bg_dialog">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_information"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:paddingBottom="15dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <EditText
+            android:id="@+id/etContactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_contact"
+            android:drawablePadding="5dp"
+            android:hint="@string/contact_name"
+            android:inputType="textCapSentences|textPersonName"
+            android:maxLength="25"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etContactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_contact_number"
+            android:drawablePadding="5dp"
+            android:hint="@string/contact_number"
+            android:inputType="phone"
+            android:maxLength="15"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etContactRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_relation"
+            android:drawablePadding="5dp"
+            android:hint="@string/relation"
+            android:inputType="textCapSentences|text"
+            android:maxLength="10"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <Button
+                android:onClick="OnCLick_ChooseContact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_margin="2dp"
+                android:text="@string/str_contact"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/bg_white"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+            <Button
+                android:id="@+id/btnSaveContact"
+                android:onClick="OnCLick_SaveContact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_margin="2dp"
+                android:text="@string/save"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/bg_accent"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:onClick="OnCLick_CancelAddContact"
+        android:layout_width="@dimen/size_button_xsmall"
+        android:layout_height="@dimen/size_button_xsmall"
+        android:layout_alignTop="@id/con_contact_dialog"
+        android:layout_alignEnd="@id/con_contact_dialog"
+        android:src="@mipmap/icon_cancel"/>
+
+</RelativeLayout>

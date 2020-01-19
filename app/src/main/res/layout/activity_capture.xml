@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayLight">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/con_toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/con_takephoto_option"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="@dimen/margin_container"
+        android:padding="@dimen/padding_screen"
+        android:background="@color/colorWhite">
+
+        <LinearLayout
+            android:id="@+id/btnCapture"
+            android:onClick="OnClick_TakePhoto"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="@dimen/size_button_small"
+                android:layout_height="@dimen/size_button_small"
+                android:src="@mipmap/icon_camera"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:textSize="@dimen/fontsize_default"
+                android:textColor="@color/colorBlueDark"
+                android:text="@string/str_camera"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnGallery"
+            android:onClick="OnClick_TakePhoto"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="@dimen/size_button_small"
+                android:layout_height="@dimen/size_button_small"
+                android:src="@mipmap/icon_gallery"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="10dp"
+                android:textSize="@dimen/fontsize_default"
+                android:textColor="@color/colorGreenDark"
+                android:text="@string/gallery"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/con_image_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/con_takephoto_option"
+        android:layout_above="@id/btnScanFoood"
+        android:layout_marginTop="@dimen/margin_container"
+        android:padding="@dimen/padding_screen"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/imageheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredients_photo"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:textColor="@color/colorBlack"/>
+
+        <ImageView
+            android:id="@+id/btnCrop"
+            android:onClick="OnCLick_Crop"
+            android:layout_width="@dimen/size_button_small"
+            android:layout_height="@dimen/size_button_small"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/icon_crop"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/icon_no_image" />
+        <ImageView
+            android:id="@+id/imageTakePreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btnCrop"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitCenter"
+            android:tag="NoImage" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/con_imagetotext_preview"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/btnScanFoood"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/con_imagetotext_preview"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnScanFoood"
+        android:onClick="OnClick_ScanFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_container"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_accent"
+        android:tag="SCAN"
+        android:text="@string/scan_image"
+        android:textColor="@color/colorWhite"/>
+</RelativeLayout>

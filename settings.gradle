@@ -1,0 +1,2 @@
+include ':app', ':additionnal', ':activation', ':mail'
+rootProject.name='Hallergen'

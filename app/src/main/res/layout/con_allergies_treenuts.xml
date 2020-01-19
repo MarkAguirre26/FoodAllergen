@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_container"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_screen"
+    android:background="@color/colorWhite">
+
+    <CheckBox
+        android:id="@+id/cbAllergy_Treenuts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tree_nuts_allergy"
+        android:textSize="@dimen/fontsize_default"
+        android:textColor="@color/colorGreenDark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_screen">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/treenutinfo"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Brazil Nuts"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Almonds"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cashews"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Macadamia Nuts"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pistachios"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pine Nuts"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Treenuts_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Walnuts"
+            android:textSize="@dimen/fontsize_small"/>
+    </LinearLayout>
+</LinearLayout>

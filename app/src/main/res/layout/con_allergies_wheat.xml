@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_container"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_screen"
+    android:background="@color/colorWhite">
+
+    <CheckBox
+        android:id="@+id/cbAllergy_Wheat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wheat_allergy"
+        android:textSize="@dimen/fontsize_default"
+        android:textColor="@color/colorGreenDark"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_screen">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wheatinfo"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flaked"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puffed"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Extruded"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wheat Bran"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wheat Germ"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Semolina"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Couscous"
+            android:textSize="@dimen/fontsize_small"/>
+        <CheckBox
+            android:id="@+id/cbAllergy_Wheat_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bulgur"
+            android:textSize="@dimen/fontsize_small"/>
+    </LinearLayout>
+</LinearLayout>

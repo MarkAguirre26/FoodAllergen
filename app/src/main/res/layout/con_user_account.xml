@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorGrayLight">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_container"
+        android:padding="@dimen/padding_screen"
+        android:background="@color/colorWhite">
+        <TextView
+            android:id="@+id/tvLoginName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="@dimen/fontsize_titlepage"/>
+
+        <TextView
+            android:id="@+id/tvLoginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="@dimen/fontsize_titlepage"/>
+
+        <Button
+            android:onClick="OnClick_EditAccount"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_button_small"
+            android:textSize="@dimen/fontsize_default"
+            android:textAllCaps="false"
+            android:textColor="@color/colorRed"
+            android:text="@string/edit_account" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/con_user_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_container"
+        android:layout_marginEnd="@dimen/margin_container">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_screen"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

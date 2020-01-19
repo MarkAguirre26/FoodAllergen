@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:onClick="none"
+    android:background="@color/colorBlack50">
+
+    <LinearLayout
+        android:id="@+id/con_add_family_dialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:padding="@dimen/padding_screen"
+        android:background="@drawable/bg_dialog">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/family_member"
+            android:textSize="@dimen/fontsize_titlepage"
+            android:paddingBottom="15dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_person"
+            android:drawablePadding="5dp"
+            android:hint="@string/name"
+            android:inputType="textCapSentences|text"
+            android:maxLength="30"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etRelation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_relation"
+            android:drawablePadding="5dp"
+            android:hint="@string/relation"
+            android:inputType="textCapSentences|text"
+            android:maxLength="10"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etBirthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:clickable="true"
+                android:drawableStart="@drawable/icon_date"
+                android:drawablePadding="5dp"
+                android:editable="false"
+                android:focusable="true"
+                android:hint="@string/birthday"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/etAge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:editable="false"
+                android:hint="@string/age"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_swap_vert"
+            android:drawablePadding="5dp"
+            android:hint="@string/height"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_swap_hori"
+            android:drawablePadding="5dp"
+            android:hint="@string/weight"
+            android:inputType="numberDecimal"
+            android:maxLength="10"
+            android:singleLine="true" />
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@id/rbMale"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/fontsize_default"
+                android:textColor="@color/colorBlack"
+                android:text="@string/gender"/>
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/male" />
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/female" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/rgPregnant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@id/rbNotPregnant"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/fontsize_default"
+                android:textColor="@color/colorBlack"
+                android:text="@string/pregnant"/>
+            <RadioButton
+                android:id="@+id/rbNotPregnant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:enabled="false"
+                android:text="@string/no" />
+            <RadioButton
+                android:id="@+id/rbPregnant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:enabled="false"
+                android:text="@string/yes" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvCheckAllergy"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:onClick="OnCLick_CheckAllergies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:layout_margin="2dp"
+                android:text="@string/check_allergies"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/bg_white"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+            <Button
+                android:id="@+id/btnSaveFamily"
+                android:onClick="OnCLick_SaveFamily"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_margin="2dp"
+                android:text="@string/save"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/bg_accent"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:onClick="OnCLick_CancelAddFamily"
+        android:layout_width="@dimen/size_button_xsmall"
+        android:layout_height="@dimen/size_button_xsmall"
+        android:layout_alignTop="@id/con_add_family_dialog"
+        android:layout_alignEnd="@id/con_add_family_dialog"
+        android:src="@mipmap/icon_cancel"/>
+</RelativeLayout>
