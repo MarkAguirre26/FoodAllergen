@@ -1,15 +1,11 @@
 package com.thesis.pdm.hallergen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.transition.Slide;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,8 +16,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox cbKeepLogin;
 
     private SharedPreferences pref;
-    private SharedPreferences.Editor prefEdit;
+//    private SharedPreferences.Editor prefEdit;
 
     private DatabaseReference refDB;// = FirebaseDatabase.getInstance().getReference();
 
@@ -51,14 +48,14 @@ public class LoginActivity extends AppCompatActivity {
         setAnimation();
         setContentView(R.layout.activity_login);
         pref = this.getSharedPreferences(String.valueOf(R.string.pref_Account), MODE_PRIVATE);
-        prefEdit = pref.edit();
+//        prefEdit = pref.edit();
         btnLogin = findViewById(R.id.btnLogin);
         btnCreate = findViewById(R.id.btnCreate);
         cbKeepLogin = findViewById(R.id.cbKeepLogin);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-        cbKeepLogin.setVisibility(View.GONE);
+//        cbKeepLogin.setVisibility(View.GONE);
 //        etUsername.setText("mark");
 //        etPassword.setText("aaaaaaaaa");
 
@@ -75,19 +72,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // if keep me login is checked move main activity
-//        if (pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false)) {
-//            startActivity(new Intent(this, MainActivity.class));
-//        }
-
-
-        boolean isKeepLogin = pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false);
-
-
-        if (isKeepLogin) {
-            logUser = Utility.getLogUserDataFromPref(pref);
-            if (logUser != null || !logUser.getUserUID().equals("") || logUser.getUserUID() != null) {
-                startActivity(new Intent(this, MainActivity.class));
-            }
+        if (pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false)) {
+            startActivity(new Intent(this, MainActivity.class));
         }
 
 
@@ -129,13 +115,13 @@ public class LoginActivity extends AppCompatActivity {
         finishAffinity();
     }
 
-    private void UserLogin(String username, String password) {
+    private boolean UserLogin(String username, String password) {
 
 
         //input validation
         if (username.equals("") || password.equals("")) {
             Toast.makeText(getApplicationContext(), "Enter your username and password.", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 //        if (!Utility.isOnline(getSystemService(Context.CONNECTIVITY_SERVICE))) {
 //            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
@@ -151,14 +137,14 @@ public class LoginActivity extends AppCompatActivity {
         //not found
         if (logUser == null) {
             Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
 
         // set log user in cache
-        Utility.setLogUserDataToPref(prefEdit, logUser);
-        // move to main activity
-        openMainActivity();
+        Utility.setLogUserDataToPref(pref.edit(), logUser);
+
+        return true;
     }
 
     // OnClick Listeners
@@ -169,21 +155,20 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, ManageAccountActivity.class));
     }
 
-    public void OnClick_KeepLogin(View view) {
-        prefEdit.putBoolean(String.valueOf(R.string.pref_KeepMeLogin), cbKeepLogin.isChecked()).apply();
-    }
 
     public void OnCLick_Login(View view) {
 
 
-//        if (!UtilityNetworkConnectivity.checkNetworkConnection(getApplicationContext())) {
         UserList = db.getUserData();
-//        }
-
-
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        UserLogin(etUsername.getText().toString(), etPassword.getText().toString());
-
+        boolean isSuccessLogin = UserLogin(etUsername.getText().toString(), etPassword.getText().toString());
+        if (!isSuccessLogin) {
+            pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
+        } else {
+            pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), true).apply();
+            // move to main activity
+            openMainActivity();
+        }
 
     }
 }
