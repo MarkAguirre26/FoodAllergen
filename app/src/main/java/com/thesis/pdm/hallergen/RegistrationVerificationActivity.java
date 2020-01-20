@@ -47,7 +47,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
 
         } else {
             rCodeMessage.setVisibility(View.VISIBLE);
-            Toast.makeText(getApplicationContext(), "Invalid Verification Code:" + rCode, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Invalid Verification Code:" + etVerificationCode.getText().toString(), Toast.LENGTH_SHORT).show();
         }
 
 

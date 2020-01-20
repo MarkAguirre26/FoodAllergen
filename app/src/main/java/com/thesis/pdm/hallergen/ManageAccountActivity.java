@@ -126,44 +126,27 @@ public class ManageAccountActivity extends AppCompatActivity {
         return Utility.getRegistrationUserDataFromPref(pref);
     }
 
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        if (v.getId() == R.id.etPassword) {
-//            Utility.ChangePasswordInputType(event, etPassword, etPassword.getTransformationMethod() == HideReturnsTransformationMethod.getInstance());
-//        } else if (v.getId() == R.id.etEmail) {
-//            if (!Utility.isOnline(getSystemService(Context.CONNECTIVITY_SERVICE))) {
-//                Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//            // Send Verification Code
-////            SendVerificationCode(v, event, etEmail, etEmail.getText().toString());
-//        }
-//        return false;
-//    }
+    public void Send(String rCode, String to) {
+        AndroidNetworking.post("http://remmplus.com/sendmail.php")
+                .addBodyParameter("to", to)
+                .addBodyParameter("code", rCode)
+                .setTag("VirificationCode")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
 
-//    public void SendVerificationCode(View view, MotionEvent event, EditText et, final String recipients) {
-//
-//        if (event.getAction() == MotionEvent.ACTION_UP) {
-//            if (event.getRawX() >= (et.getRight() - et.getCompoundDrawables()[2].getBounds().width())) {
-//                Vcode = Vcode == 0 ? new Random().nextInt(8999) + 1000 : Vcode;
-//                Toast.makeText(getApplicationContext(), "Wait for Verification Code.", Toast.LENGTH_SHORT).show();
-//                view.setEnabled(false);
-//                new Thread(new Runnable() {
-//                    public void run() {
-//                        try {
-//                            GMailSender sender = new GMailSender("hallergenapp@gmail.com", "G1Athesis");
-//                            sender.sendMail(
-//                                    "[ " + Vcode + " ] Verification Code",
-//                                    "Enjoy using our application",
-//                                    "hallergenapp@gmail.com",
-//                                    recipients);
-//                        } catch (Exception e) {
-//                            Toast.makeText(getApplicationContext(), "Error Sending Verification", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                }).start();
-//                view.setEnabled(true);
-//            }
-//        }
-//    }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Toast.makeText(ManageAccountActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                    }
+                });
+    }
+
 }

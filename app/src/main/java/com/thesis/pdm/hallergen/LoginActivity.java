@@ -58,8 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-        etUsername.setText("mark");
-        etPassword.setText("aaaaaaaaa");
+        cbKeepLogin.setVisibility(View.GONE);
+//        etUsername.setText("mark");
+//        etPassword.setText("aaaaaaaaa");
 
         db = new DatabaseAdapter(getApplicationContext());
 //
@@ -74,9 +75,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // if keep me login is checked move main activity
-        if (pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false)) {
-            startActivity(new Intent(this, MainActivity.class));
+//        if (pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false)) {
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
+
+
+        boolean isKeepLogin = pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false);
+
+
+        if (isKeepLogin) {
+            logUser = Utility.getLogUserDataFromPref(pref);
+            if (logUser != null || !logUser.getUserUID().equals("") || logUser.getUserUID() != null) {
+                startActivity(new Intent(this, MainActivity.class));
+            }
         }
+
 
         // show/hide password
         etPassword.setOnTouchListener(new View.OnTouchListener() {
@@ -141,18 +154,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        //Save all users to sqlite
-//        for (ModelsUser mUser : UserList) {
-//            db.insertUserData(mUser);
-//            if (mUser.getFamily().size() > 0) {
-//                for (ModelsFamily family : mUser.getFamily()) {
-//                    db.insertFamilyData(family);
-//                }
-//            }
-//
-//
-//        }
-
 
         // set log user in cache
         Utility.setLogUserDataToPref(prefEdit, logUser);
@@ -182,13 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         UserLogin(etUsername.getText().toString(), etPassword.getText().toString());
-//
-//        for (ModelsUser u : UserList) {
-//            if (u.getFamily().size() > 0) {
-//                Log.d("Family", u.getFamily().get(0).getName());
-//            }
-//
-//        }
+
 
     }
 }
