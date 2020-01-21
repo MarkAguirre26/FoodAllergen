@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-//        cbKeepLogin.setVisibility(View.GONE);
+
 //        etUsername.setText("mark");
 //        etPassword.setText("aaaaaaaaa");
 
