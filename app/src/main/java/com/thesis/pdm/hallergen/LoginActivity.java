@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //not found
         if (logUser == null) {
-            Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_SHORT).show();
+
             return false;
         }
 
@@ -163,9 +163,15 @@ public class LoginActivity extends AppCompatActivity {
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         boolean isSuccessLogin = UserLogin(etUsername.getText().toString(), etPassword.getText().toString());
         if (!isSuccessLogin) {
-            pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
+            Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_SHORT).show();
+          //  pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
         } else {
-            pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), true).apply();
+            if(cbKeepLogin.isChecked()){
+                pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), true).apply();
+            }else{
+                pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
+            }
+
             // move to main activity
             openMainActivity();
         }
