@@ -113,14 +113,6 @@ public class Utility {
 
     public static ModelsUser getLogUserDataFromPref(SharedPreferences pref) {
 
-//        prefEdit.putString(String.valueOf(R.string.pref_UID), logUser.getUserUID()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Fname), logUser.getFirstName()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Mname), logUser.getMiddleName()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Lname), logUser.getLastName()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Username), logUser.getUsername()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Password), logUser.getPassword()).apply();
-//        prefEdit.putString(String.valueOf(R.string.pref_Email), logUser.getEmail()).apply();
-
         ModelsUser user  =  new ModelsUser();
         user.setUserUID(pref.getString(String.valueOf(R.string.pref_UID), ""));
         user.setFirstName(pref.getString(String.valueOf(R.string.pref_Fname), ""));

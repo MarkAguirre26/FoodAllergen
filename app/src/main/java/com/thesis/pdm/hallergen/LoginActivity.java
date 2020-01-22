@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.thesis.pdm.hallergen.Variable.logUser;
@@ -60,19 +61,12 @@ public class LoginActivity extends AppCompatActivity {
 //        etPassword.setText("aaaaaaaaa");
 
         db = new DatabaseAdapter(getApplicationContext());
-//
-//        if (UtilityNetworkConnectivity.checkNetworkConnection(getApplicationContext())) {
-//            refDB = FirebaseDatabase.getInstance().getReference();
-//            UserList = Utility.GetAllUsersToFirebase(refDB);
-//        } else {
-//           // Toast.makeText(getApplicationContext(),"Offline",Toast.LENGTH_SHORT).show();
-////            TO DO
-////           openNoOfflineDataActivity();
-//        }
-
 
         // if keep me login is checked move main activity
         if (pref.getBoolean(String.valueOf(R.string.pref_KeepMeLogin), false)) {
+            ModelsUser modelsUser = Utility.getLogUserDataFromPref(pref);
+
+            userLogin(Arrays.asList(modelsUser), modelsUser.getUsername(), modelsUser.getPassword());
             startActivity(new Intent(this, MainActivity.class));
         }
 
@@ -115,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         finishAffinity();
     }
 
-    private boolean UserLogin(String username, String password) {
+    private boolean userLogin(List<ModelsUser> modelsUsers, String username, String password) {
 
 
         //input validation
@@ -129,8 +123,8 @@ public class LoginActivity extends AppCompatActivity {
 //        }
 
         // Find input username password if exist
-        ArrayList<ModelsUser> userList = new ArrayList<>(UserList.size());
-        userList.addAll(UserList);
+        ArrayList<ModelsUser> userList = new ArrayList<>(modelsUsers.size());
+        userList.addAll(modelsUsers);
         logUser = Utility.FindUser(username, password, userList);
 
 
@@ -161,15 +155,15 @@ public class LoginActivity extends AppCompatActivity {
 
         UserList = db.getUserData();
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        boolean isSuccessLogin = UserLogin(etUsername.getText().toString(), etPassword.getText().toString());
+        boolean isSuccessLogin = userLogin(UserList, etUsername.getText().toString(), etPassword.getText().toString());
         if (!isSuccessLogin) {
             Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_SHORT).show();
-          //  pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
+            //  pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
         } else {
 
-            if(cbKeepLogin.isChecked()){
+            if (cbKeepLogin.isChecked()) {
                 pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), true).apply();
-            }else{
+            } else {
                 pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
             }
 

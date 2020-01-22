@@ -393,14 +393,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     private void initData() {
         // Get All user if new Account
-//        if (pref.getString(String.valueOf(R.string.pref_UID), "").equals("")) {
-////            _userList = Utility.GetAllUsersToFirebase(refDB);
-//            findViewById(R.id.con_sett_about).setVisibility(View.VISIBLE);
-//            findViewById(R.id.con_about_dialog).startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_bounce));
-//        }
-
-
-        //Get Login User Data
+        //Get Login etBirthdayUser Data
         tvUsername.setText(logUser.getUsername());
         tvName.setText(String.format("%s, %s %s",
                 logUser.getLastName(),
