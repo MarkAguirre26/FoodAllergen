@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_SHORT).show();
           //  pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), false).apply();
         } else {
+
             if(cbKeepLogin.isChecked()){
                 pref.edit().putBoolean(String.valueOf(R.string.pref_KeepMeLogin), true).apply();
             }else{

@@ -46,6 +46,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), RegistrationSuccessActivity.class));//Jump to main activity
 
         } else {
+
             rCodeMessage.setVisibility(View.VISIBLE);
 //            Toast.makeText(getApplicationContext(), "Invalid Verification Code:" + etVerificationCode.getText().toString(), Toast.LENGTH_SHORT).show();
         }
@@ -62,7 +63,7 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
 
     public void reSend_Clicked(View view) {
         String email = ManageAccountActivity.getRegistrationUserData().getEmail();
-        Email.Send(rCode, email);
+        Email.Send(getApplicationContext(),rCode, email);
         Toast.makeText(getApplicationContext(), "Verification Code Send to " + email, Toast.LENGTH_SHORT).show();
     }
 }

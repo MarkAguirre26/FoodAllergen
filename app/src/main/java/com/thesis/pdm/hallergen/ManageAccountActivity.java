@@ -1,46 +1,18 @@
 package com.thesis.pdm.hallergen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Message;
-import android.se.omapi.Session;
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.text.method.TransformationMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
-import java.net.PasswordAuthentication;
-import java.util.Properties;
 import java.util.Random;
-
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.Multipart;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.sql.DataSource;
 
 public class ManageAccountActivity extends AppCompatActivity {
 
@@ -93,6 +65,8 @@ public class ManageAccountActivity extends AppCompatActivity {
                 return;
             }
 
+
+
             ModelsUser newUser = new ModelsUser();
             newUser.setUserUID(getRandomNumber(1000, 10000) + "");
             newUser.setFirstName(strFname);
@@ -103,7 +77,7 @@ public class ManageAccountActivity extends AppCompatActivity {
             newUser.setEmail(strEmail);
 
             String rCode = getRandomNumber(1000, 10000) + "";
-            Email.Send(rCode, newUser.getEmail());
+            Email.Send(getApplicationContext(),rCode, newUser.getEmail());
             Utility.setRegistrationUserDataToPref(pref, newUser, rCode);
             startActivity(new Intent(this, RegistrationVerificationActivity.class));
 
@@ -126,27 +100,6 @@ public class ManageAccountActivity extends AppCompatActivity {
         return Utility.getRegistrationUserDataFromPref(pref);
     }
 
-    public void Send(String rCode, String to) {
-        AndroidNetworking.post("http://remmplus.com/sendmail.php")
-                .addBodyParameter("to", to)
-                .addBodyParameter("code", rCode)
-                .setTag("VirificationCode")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // do anything with response
 
-                    }
-
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Toast.makeText(ManageAccountActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                    }
-                });
-    }
 
 }
