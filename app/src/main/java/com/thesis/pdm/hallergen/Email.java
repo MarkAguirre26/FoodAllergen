@@ -29,6 +29,7 @@ public class Email {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("errorHere", error.getMessage());
 
             }
 

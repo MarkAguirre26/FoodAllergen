@@ -44,31 +44,27 @@ public class CaptureActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.toolbar_title);
         tvTitle.setText(R.string.str_scan_foodproducts);
 
-        btnScanFood             = findViewById(R.id.btnScanFoood);
-        imageTakePreview        = findViewById(R.id.imageTakePreview);
-        tvOutputText            = findViewById(R.id.tvOutput);
-        tvImageTextTitle        = findViewById(R.id.tvImageTextTitle);
+        btnScanFood = findViewById(R.id.btnScanFoood);
+        imageTakePreview = findViewById(R.id.imageTakePreview);
+        tvOutputText = findViewById(R.id.tvOutput);
+        tvImageTextTitle = findViewById(R.id.tvImageTextTitle);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode != RESULT_OK)
-        {
+        if (resultCode != RESULT_OK) {
             return;
         }
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case 0: // Capture image
-                if(fileName == null)
-                {
+                if (fileName == null) {
                     return;
                 }
                 imageTakePreview.setImageURI(uriImage);
                 imageTakePreview.setTag("takePhoto");
                 break;
             case 1: // Pick from gallary
-                if(data == null)
-                {
+                if (data == null) {
                     return;
                 }
                 uriImage = data.getData();
@@ -92,12 +88,9 @@ public class CaptureActivity extends AppCompatActivity {
 
     //Function for back buttion
     private void ToolbarBack() {
-        if(btnScanFood.getTag().toString().equals("CHECK"))
-        {
+        if (btnScanFood.getTag().toString().equals("CHECK")) {
             HidePreview();
-        }
-        else
-        {
+        } else {
             finish();
         }
     }
@@ -106,7 +99,7 @@ public class CaptureActivity extends AppCompatActivity {
     private void ShowPreview(String textpreview) {
         tvTitle.setText(textpreview.equals("Nutrition") ? R.string.scan_nutriontions : R.string.scan_ingredients);
         findViewById(R.id.con_imagetotext_preview).setVisibility(View.VISIBLE);
-        findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this,R.anim.anim_trans_bot_norm));
+        findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_trans_bot_norm));
         btnScanFood.setText(R.string.check_for_family);
         btnScanFood.setTag("CHECK");
     }
@@ -115,35 +108,30 @@ public class CaptureActivity extends AppCompatActivity {
     private void HidePreview() {
         tvTitle.setText(R.string.str_scan_foodproducts);
         findViewById(R.id.con_imagetotext_preview).setVisibility(View.GONE);
-        findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this,R.anim.anim_trans_norm_bot));
+        findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_trans_norm_bot));
         btnScanFood.setText(R.string.scan_image);
         btnScanFood.setTag("SCAN");
     }
 
     // OCR or Google Vision API
     private String GetTextFromImage(ImageView InputImage) {
-        if(InputImage.getDrawable() == null)
-        {
+        if (InputImage.getDrawable() == null) {
             return "No Image";
         }
         BitmapDrawable drawable = (BitmapDrawable) InputImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
-        if (!textRecognizer.isOperational())
-        {
+        if (!textRecognizer.isOperational()) {
             // Device is not compatible for API
             return "Detector dependencies are not yet available";
-        }
-        else
-        {
+        } else {
             // Set the bitmap taken to the frame to perform OCR Operations.
             Frame frame = new Frame.Builder().setBitmap(bitmap).build();
             SparseArray<TextBlock> items = textRecognizer.detect(frame);
             StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < items.size(); i++)
-            {
-                TextBlock item = (TextBlock)items.valueAt(i);
+            for (int i = 0; i < items.size(); i++) {
+                TextBlock item = (TextBlock) items.valueAt(i);
                 strBuilder.append(item.getValue());
                 strBuilder.append("\n");
             }
@@ -151,30 +139,32 @@ public class CaptureActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckHarfulIngredients() {
-        if(!tvImageTextTitle.getText().toString().equals("Ingredients") && !tvImageTextTitle.getText().toString().equals("Nutrition"))
-        {
-            Toast.makeText(getApplicationContext(),"Not Ingredients or Nutrition",Toast.LENGTH_SHORT).show();
+    private void CheckHarfulIngredients(View view) {
+
+        if (!tvImageTextTitle.getText().toString().equals("Ingredients") && !tvImageTextTitle.getText().toString().equals("Nutrition")) {
+            Toast.makeText(getApplicationContext(), "Not Ingredients or Nutrition", Toast.LENGTH_SHORT).show();
             return;
         }
-        // TODO
-        Toast.makeText(getApplicationContext(),"TODO",Toast.LENGTH_SHORT).show();
+        Variable.isNew = "New";
+        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
+        startActivity(new Intent(this, CheckAvailabilityForFamilyActivity.class));
     }
 
     public void OnClick_ToolbarBack(View view) {
-       ToolbarBack();
+        ToolbarBack();
     }
 
     public void OnClick_TakePhoto(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(this,R.anim.anim_pulse_out));
-        switch (view.getId())
-        {
+        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
+        switch (view.getId()) {
             case R.id.btnCapture:
 
                 // Set Path to Internal Storage
-                File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Hallergen","CaptureImage");
+                File filepath = new File(Environment.getExternalStorageDirectory().getPath() + "/Hallergen", "CaptureImage");
                 // Add folder if not exist
-                if (!filepath.exists()) { filepath.mkdirs(); }
+                if (!filepath.exists()) {
+                    filepath.mkdirs();
+                }
                 //get URI from path
                 fileName = filepath + "/capture.jpg";
                 uriImage = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".fileprovider", new File(fileName));
@@ -182,14 +172,14 @@ public class CaptureActivity extends AppCompatActivity {
                 // capture
                 Intent takePhoto = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 // set image location
-                takePhoto.putExtra(MediaStore.EXTRA_OUTPUT,uriImage);
+                takePhoto.putExtra(MediaStore.EXTRA_OUTPUT, uriImage);
                 // apply permission
                 takePhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivityForResult(takePhoto, 0);
                 break;
             case R.id.btnGallery:
                 // pick
-                Intent pickPhoto =  new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickPhoto, 1);
                 break;
         }
@@ -197,8 +187,7 @@ public class CaptureActivity extends AppCompatActivity {
 
     // CROP API
     public void OnCLick_Crop(View view) {
-        if(imageTakePreview.getTag().toString().equals("NoImage"))
-        {
+        if (imageTakePreview.getTag().toString().equals("NoImage")) {
             return;
         }
         CropImage.activity(uriImage).start(this);
@@ -206,14 +195,12 @@ public class CaptureActivity extends AppCompatActivity {
 
     // All in one button
     public void OnClick_ScanFood(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(this,R.anim.anim_pulse_out));
+        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         btnScanFood = (Button) view;
-        if(btnScanFood.getTag().toString().equals("SCAN"))
-        {
+        if (btnScanFood.getTag().toString().equals("SCAN")) {
             // validate if have image
-            if(imageTakePreview.getTag().toString().equals("NoImage"))
-            {
-             return;
+            if (imageTakePreview.getTag().toString().equals("NoImage")) {
+                return;
             }
             // get text from image
             String outputText = GetTextFromImage(imageTakePreview);
@@ -221,24 +208,22 @@ public class CaptureActivity extends AppCompatActivity {
             tvOutputText.setText(outputText);
 
             // check if contain ingredients
-            if(outputText.contains("INGREDIENTS") || outputText.contains("Ingredients") || outputText.contains("ingredients") ) {
+            if (outputText.contains("INGREDIENTS") || outputText.contains("Ingredients") || outputText.contains("ingredients")) {
                 tvImageTextTitle.setText("Ingredients");
             }
             // check if contain nutrition
-            else if(outputText.contains("NUTRITION") || outputText.contains("Nutrition") || outputText.contains("nutrition")) {
+            else if (outputText.contains("NUTRITION") || outputText.contains("Nutrition") || outputText.contains("nutrition")) {
                 tvImageTextTitle.setText("Nutrition");
             }
             // Take other image if both is not visible
             else {
-                Toast.makeText(getApplicationContext(),"Take or crop other image",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Take or crop other image", Toast.LENGTH_SHORT).show();
                 return;
             }
             // display page of text
             ShowPreview(tvImageTextTitle.getText().toString());
-        }
-        else
-        {
-            CheckHarfulIngredients();
+        } else {
+            CheckHarfulIngredients(view);
         }
     }
 }

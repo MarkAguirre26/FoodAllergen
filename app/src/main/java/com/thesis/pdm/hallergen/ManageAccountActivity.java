@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
+import static com.thesis.pdm.hallergen.Variable.rCode;
+
 public class ManageAccountActivity extends AppCompatActivity {
 
     private EditText etFName, etMName, etLName, etUsername, etPassword, etEmail;
@@ -76,7 +78,8 @@ public class ManageAccountActivity extends AppCompatActivity {
             newUser.setPassword(strPass);
             newUser.setEmail(strEmail);
 
-            String rCode = getRandomNumber(1000, 10000) + "";
+            String vCode = getRandomNumber(1000, 10000) + "";
+            rCode =  vCode;
             Email.Send(getApplicationContext(),rCode, newUser.getEmail());
             Utility.setRegistrationUserDataToPref(pref, newUser, rCode);
             startActivity(new Intent(this, RegistrationVerificationActivity.class));
@@ -86,8 +89,8 @@ public class ManageAccountActivity extends AppCompatActivity {
 
 
     public static String getVerificationCode() {
-        Variable.rCode = pref.getString(String.valueOf(R.string.pref_code), "");
-        return Variable.rCode;
+        rCode = pref.getString(String.valueOf(R.string.pref_code), "");
+        return rCode;
     }
 
 
