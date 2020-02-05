@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
+import static com.thesis.pdm.hallergen.Variable.UserList;
 import static com.thesis.pdm.hallergen.Variable.rCode;
 
 public class ManageAccountActivity extends AppCompatActivity {
@@ -63,10 +64,17 @@ public class ManageAccountActivity extends AppCompatActivity {
             String strEmail = etEmail.getText().toString();
 
             if (strFname.equals("") || strMname.equals("") || strLname.equals("") || strUser.equals("") || strPass.equals("")) {
-                Toast.makeText(getApplicationContext(), "Fill Required Infromations", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Fill Required Information", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+
+            for (ModelsUser modelsUser : UserList) {
+                if (modelsUser.getUserUID().equalsIgnoreCase(strUser)) {
+                    Toast.makeText(getApplicationContext(), "Username already exist", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
 
 
             ModelsUser newUser = new ModelsUser();
@@ -79,8 +87,8 @@ public class ManageAccountActivity extends AppCompatActivity {
             newUser.setEmail(strEmail);
 
             String vCode = getRandomNumber(1000, 10000) + "";
-            rCode =  vCode;
-            Email.Send(getApplicationContext(),rCode, newUser.getEmail());
+            rCode = vCode;
+            Email.Send(getApplicationContext(), rCode, newUser.getEmail());
             Utility.setRegistrationUserDataToPref(pref, newUser, rCode);
             startActivity(new Intent(this, RegistrationVerificationActivity.class));
 
@@ -102,7 +110,6 @@ public class ManageAccountActivity extends AppCompatActivity {
     public static ModelsUser getRegistrationUserData() {
         return Utility.getRegistrationUserDataFromPref(pref);
     }
-
 
 
 }

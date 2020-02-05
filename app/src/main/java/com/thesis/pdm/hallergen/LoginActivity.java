@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.thesis.pdm.hallergen.Variable.UserList;
 import static com.thesis.pdm.hallergen.Variable.logUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference refDB;// = FirebaseDatabase.getInstance().getReference();
 
     //    private ModelsUser logUser = new ModelsUser();
-    private List<ModelsUser> UserList = new ArrayList<>();
+//    private List<ModelsUser> UserList = new ArrayList<>();
 
     private DatabaseAdapter db;// = new DatabaseAdapter(getApplicationContext());
 
@@ -124,6 +125,8 @@ public class LoginActivity extends AppCompatActivity {
         // Find input username password if exist
         ArrayList<ModelsUser> userList = new ArrayList<>(modelsUsers.size());
         userList.addAll(modelsUsers);
+
+
         logUser = Utility.FindUser(username, password, userList);
 
 
@@ -144,6 +147,8 @@ public class LoginActivity extends AppCompatActivity {
     public void OnClick_CreateAccount(View view) {
 //        findViewById(R.id.btnSubmit).setTag("New");
         Variable.isNew = "New";
+        UserList = new ArrayList<>();
+        UserList = db.getUserData();
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         startActivity(new Intent(this, ManageAccountActivity.class));
     }
