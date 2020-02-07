@@ -1,7 +1,9 @@
 package com.thesis.pdm.hallergen;
 
 public class Party {
+
     private int lifeStageAgeGroup;
+    private String name;
     private int age;
     private int gender;
     private int weight;
@@ -9,6 +11,13 @@ public class Party {
     private int lactating;
 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getLifeStageAgeGroup() {
         return lifeStageAgeGroup;

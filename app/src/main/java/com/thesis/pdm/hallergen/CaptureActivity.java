@@ -147,7 +147,7 @@ public class CaptureActivity extends AppCompatActivity {
         }
         Variable.isNew = "New";
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        startActivity(new Intent(this, CheckAvailabilityForFamilyActivity.class));
+        startActivity(new Intent(this, TableActivity.class));
     }
 
     public void OnClick_ToolbarBack(View view) {
