@@ -239,11 +239,11 @@ public class Utility {
 
 
 
-    public static String getAge(int year, int month, int day) {
+    public static String getAge(String date) {
         Calendar dob = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
 
-        dob.set(year, month, day);
+        dob.setTime(stringToDate(date));
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
@@ -254,7 +254,7 @@ public class Utility {
         return String.valueOf(age);
     }
 
-    public static Date convertStringToDate(String strDate) {
+    public static Date stringToDate(String strDate) {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         try {
             return format.parse(strDate);

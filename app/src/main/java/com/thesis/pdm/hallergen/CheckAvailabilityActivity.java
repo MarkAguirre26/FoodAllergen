@@ -100,7 +100,7 @@ public class CheckAvailabilityActivity extends AppCompatActivity {
         txtEssentialFattyDailyIntake.setText("");
         txtDietaryFiberDailyIntake.setText("");
         txtWaterDailyIntake.setText(String.valueOf(rmi.getWaterMin()));
-
+        txtAgeIntake.setText("Age: " + String.valueOf(party.getAge()));
 
     }
 
@@ -201,10 +201,6 @@ public class CheckAvailabilityActivity extends AppCompatActivity {
     private List<String> getGamilies() {
         logUser.setFamily(db.getFamilyData(logUser));
         List<ModelsFamily> families = logUser.getFamily();
-
-
-
-
 
 
         List<String> names = new ArrayList<>();
