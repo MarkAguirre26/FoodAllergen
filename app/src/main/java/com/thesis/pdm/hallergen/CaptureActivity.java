@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -97,6 +98,7 @@ public class CaptureActivity extends AppCompatActivity {
 
     // Go to Scanned Image
     private void ShowPreview(String textpreview) {
+        Log.d("herehere", textpreview);
         tvTitle.setText(textpreview.equals("Nutrition") ? R.string.scan_nutriontions : R.string.scan_ingredients);
         findViewById(R.id.con_imagetotext_preview).setVisibility(View.VISIBLE);
         findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_trans_bot_norm));
@@ -147,7 +149,7 @@ public class CaptureActivity extends AppCompatActivity {
         }
         Variable.isNew = "New";
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        startActivity(new Intent(this, TableActivity.class));
+        startActivity(new Intent(this, CheckAvailabilityActivity.class));
     }
 
     public void OnClick_ToolbarBack(View view) {
@@ -206,7 +208,7 @@ public class CaptureActivity extends AppCompatActivity {
             String outputText = GetTextFromImage(imageTakePreview);
             // display text
             tvOutputText.setText(outputText);
-
+            Log.d("tvOutputText", outputText);
             // check if contain ingredients
             if (outputText.contains("INGREDIENTS") || outputText.contains("Ingredients") || outputText.contains("ingredients")) {
                 tvImageTextTitle.setText("Ingredients");

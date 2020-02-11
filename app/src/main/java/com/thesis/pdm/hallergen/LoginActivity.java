@@ -29,6 +29,7 @@ import static com.thesis.pdm.hallergen.Variable.logUser;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     // Declairation
     private Button btnLogin, btnCreate;
     private EditText etUsername, etPassword;
@@ -49,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setAnimation();
         setContentView(R.layout.activity_login);
+
+
         pref = this.getSharedPreferences(String.valueOf(R.string.pref_Account), MODE_PRIVATE);
 //        prefEdit = pref.edit();
         btnLogin = findViewById(R.id.btnLogin);
@@ -57,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
-//        etUsername.setText("mark");
-//        etPassword.setText("aaaaaaaaa");
+        etUsername.setText("mark");
+        etPassword.setText("aaaaaaaaaa");
 
         db = new DatabaseAdapter(getApplicationContext());
 
@@ -145,12 +148,18 @@ public class LoginActivity extends AppCompatActivity {
 
     // OnClick Listeners
     public void OnClick_CreateAccount(View view) {
-//        findViewById(R.id.btnSubmit).setTag("New");
+
         Variable.isNew = "New";
         UserList = new ArrayList<>();
         UserList = db.getUserData();
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         startActivity(new Intent(this, ManageAccountActivity.class));
+
+
+
+
+
+
     }
 
 
@@ -176,4 +185,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
+
+
+
