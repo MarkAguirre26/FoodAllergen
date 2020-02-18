@@ -100,12 +100,14 @@ public class ManageAccountActivity extends AppCompatActivity {
 
             String vCode = getRandomNumber(1000, 10000) + "";
             rCode = vCode;
-            Email.Send(getApplicationContext(), rCode, newUser.getEmail());
+            EmailSender.Send(getApplicationContext(), rCode, newUser.getEmail());
             Utility.setRegistrationUserDataToPref(pref, newUser, rCode);
             startActivity(new Intent(this, RegistrationVerificationActivity.class));
 
         }
     }
+
+
 
 
     public static String getVerificationCode() {

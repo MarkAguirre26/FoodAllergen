@@ -6,8 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationVerificationActivity">
 
+    <TextView
+        android:id="@+id/txtemailsentLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="50sp"
+        android:gravity="center_horizontal"
+        android:text="Code sent to "
+        android:textColor="@color/colorBlack50"
+        android:textSize="20sp" />
 
     <LinearLayout
+        android:id="@+id/layoutCeneter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -28,7 +41,6 @@
             android:layout_marginTop="10dp"
             android:hint="@string/verification_code"
             android:inputType="number"
-            android:maxLength="4"
             android:singleLine="true" />
 
 
@@ -40,16 +52,16 @@
             android:textAlignment="center"
             android:textColor="@color/colorRed" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:background="#00ffffff"
-                    android:onClick="reSend_Clicked"
-                    android:text="@string/re_send"
-                    android:textAllCaps="false"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="#00ffffff"
+            android:onClick="reSend_Clicked"
+            android:text="@string/re_send"
+            android:textAllCaps="false"
 
-                    android:textColor="#2196F3" />
+            android:textColor="#2196F3" />
     </LinearLayout>
 
     <Button

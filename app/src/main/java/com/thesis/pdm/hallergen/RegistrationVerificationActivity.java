@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -16,11 +15,10 @@ import static com.thesis.pdm.hallergen.Variable.rCode;
 public class RegistrationVerificationActivity extends AppCompatActivity {
 
     DatabaseAdapter db;
-
-
     EditText etVerificationCode;
     TextView rCodeMessage;
-
+    TextView txtemailsentLabel;
+    String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +26,12 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration_verification);
         etVerificationCode = findViewById(R.id.etVerificationCode);
         rCodeMessage = findViewById(R.id.rCodeMessage);
+        txtemailsentLabel = findViewById(R.id.txtemailsentLabel);
         rCodeMessage.setVisibility(View.GONE);
 
-
+        email = ManageAccountActivity.getRegistrationUserData().getEmail();
         db = new DatabaseAdapter(this);
-
+        txtemailsentLabel.setText(txtemailsentLabel.getText() + ": " + email);
 
     }
 
@@ -58,12 +57,13 @@ public class RegistrationVerificationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), ManageAccountActivity.class));
+
         finish();
     }
 
     public void reSend_Clicked(View view) {
-        String email = ManageAccountActivity.getRegistrationUserData().getEmail();
-        Email.Send(getApplicationContext(),rCode, email);
+
+        EmailSender.Send(getApplicationContext(), rCode, email);
         Toast.makeText(getApplicationContext(), "Verification Code Send to " + email, Toast.LENGTH_SHORT).show();
     }
 }

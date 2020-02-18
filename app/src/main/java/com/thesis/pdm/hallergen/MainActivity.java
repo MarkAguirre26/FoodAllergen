@@ -34,6 +34,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -415,6 +418,18 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         recyclerView.setLayoutManager(layoutManager);
         refreshList();
 
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
+
     }
 
     private void refreshList() {
@@ -515,7 +530,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         findViewById(R.id.con_datepicker).setVisibility(View.GONE);
         etFamBirthday.setText(String.format("%s/%s/%s", picker.getMonth() + 1, picker.getDayOfMonth(), picker.getYear()));
-        etFamAge.setText(Utility.getAge(picker.getYear(), picker.getMonth() + 1, picker.getDayOfMonth()));
+
+        etFamAge.setText(Utility.getAge(picker.getDayOfMonth() + "/" + (picker.getMonth() + 1) + "/" + picker.getYear()));
     }
 
     public void OnCLick_CheckAllergies(View view) {
@@ -637,7 +653,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         etFamRelation.setText(selectedFamMember.getRelation());
         etFamBirthday.setText(selectedFamMember.getBirthday());
         String[] date = selectedFamMember.getBirthday().split("/");
-        etFamAge.setText(Utility.getAge(Integer.parseInt(date[2]), Integer.parseInt(date[0]), Integer.parseInt(date[1])));
+        etFamAge.setText(Utility.getAge(Integer.parseInt(date[1]) + "/" + Integer.parseInt(date[0]) + "/" + Integer.parseInt(date[2])));
         etFamHeight.setText(String.valueOf(selectedFamMember.getHeight()));
         etFamWeight.setText(String.valueOf(selectedFamMember.getWeight()));
         rbMale.setChecked(selectedFamMember.isGender());
