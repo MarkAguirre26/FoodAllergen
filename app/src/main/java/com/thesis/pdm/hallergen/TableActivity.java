@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import javax.xml.validation.Validator;
+
 public class TableActivity extends AppCompatActivity {
 
     TextView txtNameIntake, txtAgeIntake, txtDateIntake, txtEnergyDailyIntake, txtEnergyScannedIntake, txtEnergyAllowanceLeftIntake, txtProteinDailyIntake, txtProteinScannedIntake, txtProteinAllowanceLeftIntake, txtTotalFatDailyIntake, txtTotalFatScannedIntake, txtTotalFatAllowanceLeftIntake, txtCarbohydrateDailyIntake, txtCarbohydrateScannedIntake, txtCarbohydrateAllowanceLeftIntake, txtEssentialFattyDailyIntake, txtEssentialFattyScannedIntake, txtEssentialFattyAllowanceLeftIntake, txtDietaryFiberDailyIntake, txtDietaryFiberScannedIntake, txtDietaryFiberAllowanceLeftIntake, txtWaterDailyIntake, txtWaterScannedIntake, txtWaterAllowanceLeftIntake;
@@ -31,10 +33,42 @@ public class TableActivity extends AppCompatActivity {
         party.setGender(Constant.MALE);
         party.setWeight(80);
 
+        //Extract values from captured
+        StringManager stringManager = new StringManager(Variable.outputText);
+        String calories = stringManager.getValueFromString("Calories");
+        String protein = stringManager.getValueFromString("Protein");
+        String totalFat = stringManager.getValueFromString("Total Fat");
+        String carbohydrate = stringManager.getValueFromString("Carbohydrate");
+        String essentialFattyAcid = stringManager.getValueFromString("Essential Fatty Acid");
+        String dietaryFiber = stringManager.getValueFromString("Dietary Fiber");
+        String water = stringManager.getValueFromString("Water");
+
+
+        //scanned
+        txtEnergyScannedIntake.setText(protein);
+        txtEnergyScannedIntake.setText(calories);
+        txtTotalFatScannedIntake.setText(totalFat);
+        txtCarbohydrateScannedIntake.setText(carbohydrate);
+        txtEssentialFattyScannedIntake.setText(essentialFattyAcid);
+        txtDietaryFiberScannedIntake.setText(dietaryFiber);
+        txtWaterScannedIntake.setText(water);
+
+        //Recommended Intake
         RecommendedEnergyIntakesPerDay reipd = new RecommendedEnergyIntakesPerDay(party);
+        RecommendedMacronutrientsIntakesPerDay rmi = new RecommendedMacronutrientsIntakesPerDay(party);
+        AcceptableMacronutrientDistributionRanges amdr = new AcceptableMacronutrientDistributionRanges(party);
         txtEnergyDailyIntake.setText(String.valueOf(reipd.getEnergy()));
-        txtEnergyScannedIntake.setText(String.valueOf(600));
+        txtProteinDailyIntake.setText(amdr.getProteinMin() + "-" + amdr.getProteinMax());
+        txtTotalFatDailyIntake.setText(amdr.getTotalFatMin() + "-" + amdr.getTotalFatMax());
+        txtCarbohydrateDailyIntake.setText(amdr.getCarbohydtrateMin() + "-" + amdr.getCarbohydtrateMax());
+        txtEssentialFattyDailyIntake.setText(rmi.getaLinolenicAcid() + "/" + rmi.getLinolenicAcid());
+        txtDietaryFiberDailyIntake.setText(rmi.getDiataryFiberMin() + "/" + rmi.getDiataryFiberMax());
+        txtWaterDailyIntake.setText(rmi.getWaterMin());
+
+        //Allowance Left
         txtEnergyAllowanceLeftIntake.setText(String.valueOf(reipd.getEnergy() - 600));
+
+
     }
 
     private void initComponents() {
@@ -68,6 +102,7 @@ public class TableActivity extends AppCompatActivity {
     }
 
     public void intakeClicked(View view) {
+
     }
 
     public void backClicked(View view) {

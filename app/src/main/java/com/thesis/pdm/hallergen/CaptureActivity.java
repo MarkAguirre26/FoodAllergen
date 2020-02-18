@@ -26,6 +26,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
 
+import static com.thesis.pdm.hallergen.Variable.outputText;
+
 public class CaptureActivity extends AppCompatActivity {
 
     //Declairation
@@ -204,6 +206,8 @@ public class CaptureActivity extends AppCompatActivity {
             }
             // get text from image
             String outputText = GetTextFromImage(imageTakePreview);
+            //pass the output to static variable
+            Variable.outputText = outputText;
             // display text
             tvOutputText.setText(outputText);
 

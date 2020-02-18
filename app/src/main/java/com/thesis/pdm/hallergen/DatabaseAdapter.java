@@ -37,6 +37,24 @@ public class DatabaseAdapter {
         return id;
     }
 
+    public long insertIntakeData(ModelIntake intake) {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(myDbHelper.ACCOUNT_ID, intake.getAccountID());
+        contentValues.put(myDbHelper.FAM_GUID, intake.getFamId());
+        contentValues.put(myDbHelper.ALLOWANCE_ENERGY, intake.getEnergy());
+        contentValues.put(myDbHelper.ALLOWANCE_PROTEIN, intake.getProtein());
+        contentValues.put(myDbHelper.ALLOWANCE_TOTAL_FAT, intake.getTotal_fat());
+        contentValues.put(myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID, intake.getEssentialFattyAcid());
+        contentValues.put(myDbHelper.ALLOWANCE_DIETARY, intake.getDietaryFiber());
+        contentValues.put(myDbHelper.ALLOWANCE_WATER, intake.getWater());
+        long id = db.insert(myDbHelper.TABLE_NAME_ALLOWANCE, null, contentValues);
+        Log.d("InsertIntakeData", contentValues.get(myDbHelper.ALLOWANCE_ENERGY).toString());
+        db.close();
+        return id;
+    }
+
 
     public long insertFamilyData(ModelsFamily family) {
         SQLiteDatabase dbb = myhelper.getWritableDatabase();
@@ -115,6 +133,24 @@ public class DatabaseAdapter {
         return id;
     }
 
+    public long updateIntakeData(ModelIntake intake) {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(myDbHelper.ACCOUNT_ID, intake.getAccountID());
+        contentValues.put(myDbHelper.FAM_GUID, intake.getFamId());
+        contentValues.put(myDbHelper.ALLOWANCE_ENERGY, intake.getEnergy());
+        contentValues.put(myDbHelper.ALLOWANCE_PROTEIN, intake.getProtein());
+        contentValues.put(myDbHelper.ALLOWANCE_TOTAL_FAT, intake.getTotal_fat());
+        contentValues.put(myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID, intake.getEssentialFattyAcid());
+        contentValues.put(myDbHelper.ALLOWANCE_DIETARY, intake.getDietaryFiber());
+        contentValues.put(myDbHelper.ALLOWANCE_WATER, intake.getWater());
+        long id = db.update(myDbHelper.TABLE_NAME_ALLOWANCE, contentValues,"fam_guid=?",new String[]{intake.getFamId()} );
+        Log.d("updateIntakeData", contentValues.get(myDbHelper.ALLOWANCE_ENERGY).toString());
+        db.close();
+        return id;
+    }
+
     public void deleteFamilyData(ModelsFamily family) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         db.execSQL("DELETE FROM " + myDbHelper.TABLE_NAME_FAMILY + " WHERE " + myDbHelper.FAMUID + "='" + family.getFamilyUID() + "'");
@@ -174,6 +210,8 @@ public class DatabaseAdapter {
         db.close();
         return list;
     }
+
+
 
 
     public List<ModelsFamily> getFamilyData(ModelsUser user) {
@@ -342,6 +380,7 @@ public class DatabaseAdapter {
         private static final String TABLE_NAME_FAMILY = "FAMILY";   // Table Name
         private static final String TABLE_NAME_ALLERGY = "ALLERGY";   // Table Name
         private static final String TABLE_NAME_CONTACT = "CONTACT";   // Table Name
+        private static final String TABLE_NAME_ALLOWANCE = "CONTACT";   // Table Name
         private static final int DATABASE_Version = 1;    // Database Version
 
         //        ----------------USER ACCOUNT------------------------
@@ -376,6 +415,27 @@ public class DatabaseAdapter {
         private static final String CONTACT_NAME = "contact_name";     //
         private static final String CONTACT_NUMBER = "contact_number";     //
         private static final String CONTACT_RELATIONSHIP = "contact_relationship";     //
+
+        //    ------------------- ALLOWANCE_LEFT -----------------------
+        private static final String ALLOWANCE_UID = "allowance_uid";     // Column I (Primary Key)
+        private static final String ALLOWANCE_ENERGY = "allowance_energy";     //
+        private static final String ALLOWANCE_PROTEIN = "allowance_protein";     //
+        private static final String ALLOWANCE_TOTAL_FAT = "allowance_total_fat";     //
+        private static final String ALLOWANCE_ESSENTIAL_FATTY_ACID = "allowance_essential_fatty_acid";     //
+        private static final String ALLOWANCE_DIETARY = "allowance_dietary";     //
+        private static final String ALLOWANCE_WATER = "allowance_water";     //
+
+
+        private static final String CREATE_ALLOWANCE_LEFT_TABLE = "CREATE TABLE " + TABLE_NAME_ALLOWANCE +
+                " (" + ALLOWANCE_UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "" + ACCOUNT_ID + " VARCHAR(255) ," +
+                "" + FAM_GUID + " VARCHAR(255) ," +
+                "" + ALLOWANCE_ENERGY + " VARCHAR(255) ," +
+                "" + ALLOWANCE_PROTEIN + " VARCHAR(255) ," +
+                "" + ALLOWANCE_TOTAL_FAT + " VARCHAR(255) ," +
+                "" + ALLOWANCE_ESSENTIAL_FATTY_ACID + " VARCHAR(255) ," +
+                "" + ALLOWANCE_DIETARY + " VARCHAR(255) ," +
+                "" + ALLOWANCE_WATER + " VARCHAR(225));";
 
 
         private static final String CREATE_CONTACT_TABLE = "CREATE TABLE " + TABLE_NAME_CONTACT +
@@ -421,6 +481,7 @@ public class DatabaseAdapter {
         private static final String DROP_TABLE_FAMILY = "DROP TABLE IF EXISTS " + TABLE_NAME_FAMILY;
         private static final String DROP_TABLE_ALLERGY = "DROP TABLE IF EXISTS " + TABLE_NAME_ALLERGY;
         private static final String DROP_TABLE_CONTACT = "DROP TABLE IF EXISTS " + TABLE_NAME_CONTACT;
+        private static final String DROP_TABLE_ALLOWANCE = "DROP TABLE IF EXISTS " + TABLE_NAME_ALLOWANCE;
         private Context context;
 
 
@@ -436,6 +497,7 @@ public class DatabaseAdapter {
                 db.execSQL(CREATE_FAMILY_TABLE);
                 db.execSQL(CREATE_ALLERGY_TABLE);
                 db.execSQL(CREATE_CONTACT_TABLE);
+                db.execSQL(CREATE_ALLOWANCE_LEFT_TABLE);
             } catch (Exception e) {
                 Message.message(context, "" + e);
             }
@@ -449,6 +511,7 @@ public class DatabaseAdapter {
                 db.execSQL(DROP_TABLE_FAMILY);
                 db.execSQL(DROP_TABLE_ALLERGY);
                 db.execSQL(DROP_TABLE_CONTACT);
+                db.execSQL(DROP_TABLE_ALLOWANCE);
                 onCreate(db);
             } catch (Exception e) {
                 Message.message(context, "" + e);

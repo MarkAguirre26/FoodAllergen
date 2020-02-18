@@ -8,4 +8,5 @@ public class Variable {
     public static ModelsUser logUser = new ModelsUser();
     public static String isNew;
     public static List<ModelsUser> UserList;// = new ArrayList<>();
+    public static String outputText = "";
 }
