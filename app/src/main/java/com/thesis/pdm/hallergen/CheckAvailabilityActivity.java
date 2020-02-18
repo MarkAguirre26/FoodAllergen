@@ -82,25 +82,46 @@ public class CheckAvailabilityActivity extends AppCompatActivity {
 
         txtDateIntake.setText((mDay + 1) + "/" + mMonth + "/" + mYear);
 
-
         Party party = new Party();
         party.setName("Markoi");
         party.setAge(30);
         party.setGender(Constant.MALE);
         party.setWeight(80);
 
+        //Extract values from captured
+        StringManager stringManager = new StringManager(Variable.outputText);
+        String calories = stringManager.getValueFromString("Calories");
+        String protein = stringManager.getValueFromString("Protein");
+        String totalFat = stringManager.getValueFromString("Total Fat");
+        String carbohydrate = stringManager.getValueFromString("Carbohydrate");
+        String essentialFattyAcid = stringManager.getValueFromString("Essential Fatty Acid");
+        String dietaryFiber = stringManager.getValueFromString("Dietary Fiber");
+        String water = stringManager.getValueFromString("Water");
+
+
+        //scanned
+        txtEnergyScannedIntake.setText(protein);
+        txtEnergyScannedIntake.setText(calories);
+        txtTotalFatScannedIntake.setText(totalFat);
+        txtCarbohydrateScannedIntake.setText(carbohydrate);
+        txtEssentialFattyScannedIntake.setText(essentialFattyAcid);
+        txtDietaryFiberScannedIntake.setText(dietaryFiber);
+        txtWaterScannedIntake.setText(water);
+
+        //Recommended Intake
         RecommendedEnergyIntakesPerDay reipd = new RecommendedEnergyIntakesPerDay(party);
         RecommendedMacronutrientsIntakesPerDay rmi = new RecommendedMacronutrientsIntakesPerDay(party);
-        txtEnergyAllowanceLeftIntake.setText(String.valueOf(reipd.getEnergy() - 600));
-
+        AcceptableMacronutrientDistributionRanges amdr = new AcceptableMacronutrientDistributionRanges(party);
         txtEnergyDailyIntake.setText(String.valueOf(reipd.getEnergy()));
-        txtEnergyScannedIntake.setText(String.valueOf(600));
-        txtTotalFatDailyIntake.setText(String.valueOf(rmi.getDiataryFiberMin()));
-        txtCarbohydrateDailyIntake.setText("");
-        txtEssentialFattyDailyIntake.setText("");
-        txtDietaryFiberDailyIntake.setText("");
-        txtWaterDailyIntake.setText(String.valueOf(rmi.getWaterMin()));
-        txtAgeIntake.setText("Age: " + String.valueOf(party.getAge()));
+        txtProteinDailyIntake.setText(amdr.getProteinMin() + "-" + amdr.getProteinMax());
+        txtTotalFatDailyIntake.setText(amdr.getTotalFatMin() + "-" + amdr.getTotalFatMax());
+        txtCarbohydrateDailyIntake.setText(amdr.getCarbohydtrateMin() + "-" + amdr.getCarbohydtrateMax());
+        txtEssentialFattyDailyIntake.setText(rmi.getaLinolenicAcid() + "/" + rmi.getLinolenicAcid());
+        txtDietaryFiberDailyIntake.setText(rmi.getDiataryFiberMin() + "/" + rmi.getDiataryFiberMax());
+        txtWaterDailyIntake.setText(rmi.getWaterMin());
+
+        //Allowance Left
+        txtEnergyAllowanceLeftIntake.setText(String.valueOf(reipd.getEnergy() - 600));
 
     }
 
