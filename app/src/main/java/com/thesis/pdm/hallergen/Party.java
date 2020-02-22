@@ -6,7 +6,7 @@ public class Party {
     private String name;
     private int age;
     private int gender;
-    private int weight;
+    private double weight;
     private int pregnant;
     private int lactating;
 
@@ -39,11 +39,11 @@ public class Party {
         this.lactating = lactating;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 

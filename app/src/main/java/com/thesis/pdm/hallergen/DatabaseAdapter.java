@@ -37,22 +37,28 @@ public class DatabaseAdapter {
         return id;
     }
 
-    public long insertIntakeData(ModelIntake intake) {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
+    public void insertIntakeData(ModelIntake intake) {
 
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+//        if (checkTableIfNotEmpty()) {
+//            updateIntakeData(intake);
+//
+//        } else {
+        ContentValues contentValues = new ContentValues();
         contentValues.put(myDbHelper.ACCOUNT_ID, intake.getAccountID());
         contentValues.put(myDbHelper.FAM_GUID, intake.getFamId());
         contentValues.put(myDbHelper.ALLOWANCE_ENERGY, intake.getEnergy());
         contentValues.put(myDbHelper.ALLOWANCE_PROTEIN, intake.getProtein());
         contentValues.put(myDbHelper.ALLOWANCE_TOTAL_FAT, intake.getTotal_fat());
+        contentValues.put(myDbHelper.ALLOWANCE_CARBOHYDRATE, intake.getCarbohydtrate());
         contentValues.put(myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID, intake.getEssentialFattyAcid());
         contentValues.put(myDbHelper.ALLOWANCE_DIETARY, intake.getDietaryFiber());
         contentValues.put(myDbHelper.ALLOWANCE_WATER, intake.getWater());
-        long id = db.insert(myDbHelper.TABLE_NAME_ALLOWANCE, null, contentValues);
-        Log.d("InsertIntakeData", contentValues.get(myDbHelper.ALLOWANCE_ENERGY).toString());
+        db.insert(myDbHelper.TABLE_NAME_ALLOWANCE, null, contentValues);
+        Log.d("InsertIntakeData", intake.getFamId());
         db.close();
-        return id;
+//        }
+
     }
 
 
@@ -142,10 +148,11 @@ public class DatabaseAdapter {
         contentValues.put(myDbHelper.ALLOWANCE_ENERGY, intake.getEnergy());
         contentValues.put(myDbHelper.ALLOWANCE_PROTEIN, intake.getProtein());
         contentValues.put(myDbHelper.ALLOWANCE_TOTAL_FAT, intake.getTotal_fat());
+        contentValues.put(myDbHelper.ALLOWANCE_CARBOHYDRATE, intake.getCarbohydtrate());
         contentValues.put(myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID, intake.getEssentialFattyAcid());
         contentValues.put(myDbHelper.ALLOWANCE_DIETARY, intake.getDietaryFiber());
         contentValues.put(myDbHelper.ALLOWANCE_WATER, intake.getWater());
-        long id = db.update(myDbHelper.TABLE_NAME_ALLOWANCE, contentValues,"fam_guid=?",new String[]{intake.getFamId()} );
+        long id = db.update(myDbHelper.TABLE_NAME_ALLOWANCE, contentValues, "fam_guid=?", new String[]{intake.getFamId()});
         Log.d("updateIntakeData", contentValues.get(myDbHelper.ALLOWANCE_ENERGY).toString());
         db.close();
         return id;
@@ -169,6 +176,11 @@ public class DatabaseAdapter {
         db.close();
     }
 
+    public void deleteLastIntake() {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        db.execSQL("DELETE FROM ALLOWANCE WHERE allowance_uid = (SELECT MAX(allowance_uid) FROM ALLOWANCE)");
+        db.close();
+    }
 
     public List<ModelsUser> getUserData() {
         List<ModelsUser> list = new ArrayList<>();
@@ -210,8 +222,6 @@ public class DatabaseAdapter {
         db.close();
         return list;
     }
-
-
 
 
     public List<ModelsFamily> getFamilyData(ModelsUser user) {
@@ -350,6 +360,101 @@ public class DatabaseAdapter {
         return list;
     }
 
+    private boolean checkForTableExists(SQLiteDatabase db) {
+        String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='" + myDbHelper.TABLE_NAME_ALLOWANCE + "'";
+        Cursor mCursor = db.rawQuery(sql, null);
+        if (mCursor.getCount() > 0) {
+            return true;
+        }
+        mCursor.close();
+        return false;
+    }
+
+    private boolean checkTableIfNotEmpty() {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String count = "SELECT count(*) FROM " + myDbHelper.TABLE_NAME_ALLOWANCE + "";
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+
+            return true;
+        }
+//leave
+        else {
+            return false;
+        }
+//populate table
+    }
+
+
+    public ModelIntake getIntakeData(String familyID) {
+        ModelIntake modelIntake = new ModelIntake();
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+
+
+        if (checkTableIfNotEmpty()) {
+//            if (checkForTableExists(db)) {
+            String[] columns = {
+                    myDbHelper.ALLOWANCE_UID,
+                    myDbHelper.ACCOUNT_ID,
+                    myDbHelper.FAM_GUID,
+                    myDbHelper.ALLOWANCE_ENERGY,
+                    myDbHelper.ALLOWANCE_PROTEIN,
+                    myDbHelper.ALLOWANCE_TOTAL_FAT,
+                    myDbHelper.ALLOWANCE_CARBOHYDRATE,
+                    myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID,
+                    myDbHelper.ALLOWANCE_DIETARY,
+                    myDbHelper.ALLOWANCE_WATER,
+            };
+
+            String selection = "fam_guid=?";
+            String[] selectionArgs = {familyID};
+
+            Cursor cursor = db.query(myDbHelper.TABLE_NAME_ALLOWANCE, columns, selection, selectionArgs, null, null, myDbHelper.ALLOWANCE_UID + " desc");
+//         Cursor cursor  =  db.rawQuery( "select * from "+myDbHelper.TABLE_NAME_ALLOWANCE,null  );
+//            res.moveToFirst();
+            Log.d("familyID", familyID + " " + cursor.getCount());
+            //CHECK if has more than 0 rows
+
+            if (cursor.moveToFirst()) {
+
+
+                String allowanceID = String.valueOf(cursor.getInt(cursor.getColumnIndex(myDbHelper.ALLOWANCE_UID)));
+                String accountID = cursor.getString(cursor.getColumnIndex(myDbHelper.ACCOUNT_ID));
+                String famId = cursor.getString(cursor.getColumnIndex(myDbHelper.FAM_GUID));
+                String energy = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_ENERGY));
+                String protein = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_PROTEIN));
+                String totalFat = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_TOTAL_FAT));
+                String carbo = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_CARBOHYDRATE));
+                String essentialFattyAcid = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_ESSENTIAL_FATTY_ACID));
+                String dietary = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_DIETARY));
+                String water = cursor.getString(cursor.getColumnIndex(myDbHelper.ALLOWANCE_WATER));
+                Log.d("famId", familyID + " " + famId + " " + allowanceID);
+
+                if (familyID.equals(famId)) {
+                    modelIntake.setId(allowanceID);
+                    modelIntake.setAccountID(accountID);
+                    modelIntake.setFamId(famId);
+                    modelIntake.setEnergy(energy);
+                    modelIntake.setProtein(protein);
+                    modelIntake.setTotal_fat(totalFat);
+                    modelIntake.setCarbohydtrate(carbo);
+                    modelIntake.setEssentialFattyAcid(essentialFattyAcid);
+                    modelIntake.setDietaryFiber(dietary);
+                    modelIntake.setWater(water);
+
+                }
+//            } else{
+//                Log.d("allowanceData", "Else Walang alowance data");
+            }
+        }
+
+
+        return modelIntake;
+    }
+
 
     public boolean checkUserExist(String username, String password) {
         String[] columns = {myDbHelper.ACCOUNT_ID};
@@ -380,7 +485,7 @@ public class DatabaseAdapter {
         private static final String TABLE_NAME_FAMILY = "FAMILY";   // Table Name
         private static final String TABLE_NAME_ALLERGY = "ALLERGY";   // Table Name
         private static final String TABLE_NAME_CONTACT = "CONTACT";   // Table Name
-        private static final String TABLE_NAME_ALLOWANCE = "CONTACT";   // Table Name
+        private static final String TABLE_NAME_ALLOWANCE = "ALLOWANCE";   // Table Name
         private static final int DATABASE_Version = 1;    // Database Version
 
         //        ----------------USER ACCOUNT------------------------
@@ -395,7 +500,7 @@ public class DatabaseAdapter {
 
         //    ------------------- FAMILY -----------------------
         private static final String FAMUID = "fam_uid";     // Column I (Primary Key)
-        private static final String FAM_GUID = "fam_guid";     // Column I (Primary Key)
+        private static final String FAM_GUID = "fam_guid";     // Column
         private static final String BIRTHDAY = "birthday";     //
         private static final String GENDER = "gender";     //
         private static final String HEIGHT = "hEight";     //
@@ -421,6 +526,7 @@ public class DatabaseAdapter {
         private static final String ALLOWANCE_ENERGY = "allowance_energy";     //
         private static final String ALLOWANCE_PROTEIN = "allowance_protein";     //
         private static final String ALLOWANCE_TOTAL_FAT = "allowance_total_fat";     //
+        private static final String ALLOWANCE_CARBOHYDRATE = "allowance_carb";     //
         private static final String ALLOWANCE_ESSENTIAL_FATTY_ACID = "allowance_essential_fatty_acid";     //
         private static final String ALLOWANCE_DIETARY = "allowance_dietary";     //
         private static final String ALLOWANCE_WATER = "allowance_water";     //
@@ -433,6 +539,7 @@ public class DatabaseAdapter {
                 "" + ALLOWANCE_ENERGY + " VARCHAR(255) ," +
                 "" + ALLOWANCE_PROTEIN + " VARCHAR(255) ," +
                 "" + ALLOWANCE_TOTAL_FAT + " VARCHAR(255) ," +
+                "" + ALLOWANCE_CARBOHYDRATE + " VARCHAR(255) ," +
                 "" + ALLOWANCE_ESSENTIAL_FATTY_ACID + " VARCHAR(255) ," +
                 "" + ALLOWANCE_DIETARY + " VARCHAR(255) ," +
                 "" + ALLOWANCE_WATER + " VARCHAR(225));";

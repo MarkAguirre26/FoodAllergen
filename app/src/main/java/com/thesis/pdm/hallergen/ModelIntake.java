@@ -4,14 +4,33 @@ package com.thesis.pdm.hallergen;
 
 public class ModelIntake {
 
+    private String id;
     private String accountID;
     private String famId;
     private String energy;
     private String protein;
     private String total_fat;
+    private String carbohydtrate;
     private String essentialFattyAcid;
     private String dietaryFiber;
     private String water;
+
+
+    public String getCarbohydtrate() {
+        return carbohydtrate;
+    }
+
+    public void setCarbohydtrate(String carbohydtrate) {
+        this.carbohydtrate = carbohydtrate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getAccountID() {
         return accountID;

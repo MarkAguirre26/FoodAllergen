@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -619,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void OnClickFamilyMemberListener(int position) {
 //        selectedFamMember = _familyList.get(position);
         selectedFamMember = logUser.getFamily().get(position);
-        tvFamName.setText(selectedFamMember.getName());
+        tvFamName.setText(selectedFamMember.getName() + " - "+ Utility.getAge(selectedFamMember.getBirthday()));
         tvFamRelation.setText(selectedFamMember.getRelation());
         tvFamBirthday.setText(selectedFamMember.getBirthday());
         tvFamHeight.setText(String.valueOf(selectedFamMember.getHeight()));
@@ -641,7 +642,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void OnLongClickFamilyMemberListener(int position) {
         selectedFamMember = logUser.getFamily().get(position);
         TextView tvname = findViewById(R.id.tvEditDelete);
-        tvname.setText(selectedFamMember.getName());
+        tvname.setText(selectedFamMember.getName() +"-"+Utility.getAge(selectedFamMember.getBirthday()));
         findViewById(R.id.con_edit_delete).setVisibility(View.VISIBLE);
         findViewById(R.id.btnSaveFamily).setTag(String.valueOf(position));
     }
@@ -649,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void OnCLick_Edit(View view) {
         findViewById(R.id.btnSaveFamily).setTag("Edit");
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        etFamName.setText(selectedFamMember.getName());
+        etFamName.setText(selectedFamMember.getName() +"-"+Utility.getAge(selectedFamMember.getBirthday()));
         etFamRelation.setText(selectedFamMember.getRelation());
         etFamBirthday.setText(selectedFamMember.getBirthday());
         String[] date = selectedFamMember.getBirthday().split("/");
@@ -701,6 +702,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void OnClick_Pharmacy(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
         //startActivity(new Intent(this,PharmacyActivity.class));
+        String url = "http://maps.google.co.uk/maps?q=Pharmacy&hl=en";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));      intent.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+        startActivity(intent);
     }
 
     public void OnClick_Settings(View view) {

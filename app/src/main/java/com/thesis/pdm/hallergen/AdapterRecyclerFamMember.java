@@ -40,7 +40,7 @@ public class AdapterRecyclerFamMember extends RecyclerView.Adapter<AdapterRecycl
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.famMemberProfile.setImageResource(_familyList.get(position).getImageResourcesId());
-        holder.famMemberName.setText(_familyList.get(position).getName());
+        holder.famMemberName.setText(_familyList.get(position).getName()+"-"+Utility.getAge(_familyList.get(position).getBirthday()));
     }
 
     @Override

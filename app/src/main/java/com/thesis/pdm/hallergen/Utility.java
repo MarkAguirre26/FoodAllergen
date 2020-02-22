@@ -264,8 +264,5 @@ public class Utility {
         return null;
     }
 
-    public static String convertDateToString(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-        return format.format(date);
-    }
+   
 }

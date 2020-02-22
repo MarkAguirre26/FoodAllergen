@@ -18,8 +18,7 @@
         android:roundIcon="@mipmap/icon_applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CheckAvailabilityActivity"></activity>
-        <activity android:name=".CheckAvailabilityForFamilyActivity" />
+        <activity android:name=".CheckNutrientIntakeActivity"></activity>
         <activity android:name=".EditAccountActivity" />
         <activity android:name=".RegistrationSuccessActivity" />
         <activity android:name=".RegistrationVerificationActivity" />

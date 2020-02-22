@@ -16,13 +16,20 @@ public class StringManager {
         String wordToFind = value.toLowerCase();
         String[] words = input.split("\n");
         for (int i = 0; i <= words.length - 1; i++) {
+            System.out.println(words[i]);
             if (words[i].toLowerCase().contains(wordToFind)) {
-                found = words[i];
+
+                if (words[i].toLowerCase().contains("calories")) {
+                    found = words[i + 1];
+                } else {
+                    found = words[i];
+                }
+
             }
 
         }
 
 
-        return found.substring(found.lastIndexOf(" ") + 1);
+        return found.substring(found.lastIndexOf(" ") + 1).replace("(", "").replace(")", "").replace("g", "").replace("L", "").replaceAll("\\D4+", "");
     }
 }

@@ -100,7 +100,7 @@ public class CaptureActivity extends AppCompatActivity {
 
     // Go to Scanned Image
     private void ShowPreview(String textpreview) {
-        Log.d("herehere", textpreview);
+
         tvTitle.setText(textpreview.equals("Nutrition") ? R.string.scan_nutriontions : R.string.scan_ingredients);
         findViewById(R.id.con_imagetotext_preview).setVisibility(View.VISIBLE);
         findViewById(R.id.con_imagetotext_preview).startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_trans_bot_norm));
@@ -149,9 +149,20 @@ public class CaptureActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Not Ingredients or Nutrition", Toast.LENGTH_SHORT).show();
             return;
         }
+
         Variable.isNew = "New";
-        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
-        startActivity(new Intent(this, CheckAvailabilityActivity.class));
+
+        if (outputText.contains("INGREDIENTS") || outputText.contains("Ingredients") || outputText.contains("ingredients")) {
+            Toast.makeText(getApplicationContext(),"INGREDIENTS",Toast.LENGTH_SHORT).show();
+        }
+        // check if contain nutrition
+        else if (outputText.contains("NUTRITION") || outputText.contains("Nutrition") || outputText.contains("nutrition")) {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_pulse_out));
+            startActivity(new Intent(this, CheckNutrientIntakeActivity.class));
+        }
+
+
+
     }
 
     public void OnClick_ToolbarBack(View view) {
