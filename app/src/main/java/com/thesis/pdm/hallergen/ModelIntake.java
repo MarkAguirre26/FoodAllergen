@@ -1,7 +1,6 @@
 package com.thesis.pdm.hallergen;
 
 
-
 public class ModelIntake {
 
     private String id;
@@ -49,7 +48,7 @@ public class ModelIntake {
     }
 
     public String getEnergy() {
-        return energy;
+        return new StringManager(energy).getFirstWordFromString();
     }
 
     public void setEnergy(String energy) {

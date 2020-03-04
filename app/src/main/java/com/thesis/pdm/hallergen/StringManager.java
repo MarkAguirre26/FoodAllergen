@@ -32,4 +32,10 @@ public class StringManager {
 
         return found.substring(found.lastIndexOf(" ") + 1).replace("(", "").replace(")", "").replace("g", "").replace("L", "").replaceAll("\\D4+", "");
     }
+
+
+    public String getFirstWordFromString() {
+        String[] v = input.split(" ");
+        return v[0];
+    }
 }
