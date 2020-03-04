@@ -182,13 +182,13 @@ public class CheckNutrientIntakeActivity extends AppCompatActivity {
         double WaterDailyIntake = txtWaterDailyIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtWaterDailyIntake.getText().toString());
 
         //scanned
-        double EnergyScannedIntake = txtEnergyScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtEnergyScannedIntake.getText().toString());
-        double ProteinScannedIntake = txtProteinScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtProteinScannedIntake.getText().toString());
-        double TotalFatScannedIntake = txtTotalFatScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtTotalFatScannedIntake.getText().toString());
-        double CarbohydrateScannedIntake = txtCarbohydrateScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtCarbohydrateScannedIntake.getText().toString());
-        double EssentialFattyScannedIntake = txtEssentialFattyScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtEssentialFattyScannedIntake.getText().toString());
-        double DietaryFiberScannedIntake = txtDietaryFiberScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtDietaryFiberScannedIntake.getText().toString());
-        double WaterScannedIntake = txtWaterScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtWaterScannedIntake.getText().toString());
+        double EnergyScannedIntake = txtEnergyScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtEnergyScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double ProteinScannedIntake = txtProteinScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtProteinScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double TotalFatScannedIntake = txtTotalFatScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtTotalFatScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double CarbohydrateScannedIntake = txtCarbohydrateScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtCarbohydrateScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double EssentialFattyScannedIntake = txtEssentialFattyScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtEssentialFattyScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double DietaryFiberScannedIntake = txtDietaryFiberScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtDietaryFiberScannedIntake.getText().toString().replaceAll("\\D4+", ""));
+        double WaterScannedIntake = txtWaterScannedIntake.getText().toString().equals("") ? 0.00 : Double.valueOf(txtWaterScannedIntake.getText().toString().replaceAll("\\D4+", ""));
 
 
         DatabaseAdapter da = new DatabaseAdapter(this);

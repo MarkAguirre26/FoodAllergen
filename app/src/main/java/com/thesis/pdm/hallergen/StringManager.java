@@ -35,7 +35,11 @@ public class StringManager {
 
 
     public String getFirstWordFromString() {
-        String[] v = input.split(" ");
-        return v[0];
+        if(input  != null){
+            String[] v = input.split(" ");
+            return v[0];
+        }
+        return input;
+
     }
 }
